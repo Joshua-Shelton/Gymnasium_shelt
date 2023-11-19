@@ -257,6 +257,14 @@ class FrozenLakeEnv(Env):
             newstate = to_s(newrow, newcol)
             newletter = desc[newrow, newcol]
             terminated = bytes(newletter) in b"GH"
+            if newletter == b"G":
+                reward = 100.0
+            elif newletter == b"H":
+                reward = -100.0
+            elif newletter == b"S":
+                reward = -1.0
+            else:
+                reward = -1.0
             reward = float(newletter == b"G")
             return newstate, reward, terminated
 
